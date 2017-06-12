@@ -26,8 +26,8 @@ target/
 Thumbs.db
 
 # loacl to online
-/src/main/resources/datasource.properties
-/src/main/resources/logback.xml
+src/main/resources/datasource.properties
+src/main/resources/logback.xml
 
 
 
