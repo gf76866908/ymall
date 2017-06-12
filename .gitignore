@@ -25,3 +25,9 @@ target/
 .DS_Store
 Thumbs.db
 
+# loacl to online
+/src/main/resources/datasource.properties
+/src/main/resources/logback.xml
+
+
+
