@@ -15,9 +15,9 @@
 
     <appender name="ymall" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--<File>d:/ymalllog/ymall.log</File>-->
-        <File>/developer/apache-tomcat-8.5.15/logs/ymall.log</File>
+        <File>/Users/zc/developer/apache-tomcat-8.5.15/logs/ymall.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/developer/apache-tomcat-8.5.15/logs/ymall.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <fileNamePattern>/Users/zc/developer/apache-tomcat-8.5.15/logs/ymall.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
             <append>true</append>
             <maxHistory>10</maxHistory>
         </rollingPolicy>
@@ -29,9 +29,9 @@
 
     <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--<File>d:/ymalllog/error.log</File>-->
-        <File>/developer/apache-tomcat-8.5.15/logs/error.log</File>
+        <File>/Users/zc/developer/apache-tomcat-8.5.15/logs/error.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/developer/apache-tomcat-8.5.15/logs/error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <fileNamePattern>/Users/zc/developer/apache-tomcat-8.5.15/logs/error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
             <!--<fileNamePattern>d:/ymalllog/error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>-->
             <append>true</append>
             <maxHistory>10</maxHistory>
