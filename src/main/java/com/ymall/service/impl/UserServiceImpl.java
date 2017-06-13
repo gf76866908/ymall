@@ -19,10 +19,10 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public ServerResponse<User> login(User user) throws UnauthorizedException {
+    public ServerResponse<User> login(String username,String password) throws UnauthorizedException {
 
         //ToDo MD5加密
-        User user_login = userMapper.selectLogin(user);
+        User user_login = userMapper.selectLogin(username,password);
         if(user_login==null){
             throw new UnauthorizedException("用户不存在或密码错误");
         }

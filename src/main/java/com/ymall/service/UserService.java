@@ -8,5 +8,5 @@ import com.ymall.pojo.User;
  * Created by zc on 2017/6/13.
  */
 public interface UserService {
-    ServerResponse<User> login  (User user) throws UnauthorizedException;
+    ServerResponse<User> login  (String username,String password) throws UnauthorizedException;
 }

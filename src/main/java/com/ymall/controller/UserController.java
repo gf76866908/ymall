@@ -28,11 +28,7 @@ public class UserController {
             @RequestParam(required = true) String username,
             @RequestParam(required = true) String password,HttpSession session) throws UnauthorizedException {
 
-            User user=new User();
-            user.setUsername(username);
-            user.setPassword(password);
-
-        ServerResponse response = userService.login(user);
+        ServerResponse response = userService.login(username,password);
 
         // 向session中加入当前用户信息
         if(response.isSuccess()){

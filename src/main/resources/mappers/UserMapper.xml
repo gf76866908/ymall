@@ -29,7 +29,7 @@
         FROM ymall_user
         WHERE username = #{username}
     </select>
-    <select id="selectLogin" resultMap="BaseResultMap" parameterType="com.ymall.pojo.User">
+    <select id="selectLogin" resultMap="BaseResultMap" parameterType="map">
         SELECT
         <include refid="Base_Column_List"/>
         FROM ymall.ymall_user

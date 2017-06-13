@@ -1,6 +1,7 @@
 package com.ymall.dao;
 
 import com.ymall.pojo.User;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
@@ -17,5 +18,5 @@ public interface UserMapper {
 
     int checkUsername(String username);
 
-    User selectLogin(User user);
+    User selectLogin(@Param("username") String username, @Param("password") String password);
 }
