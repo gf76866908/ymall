@@ -35,6 +35,16 @@
         FROM ymall.ymall_user
         WHERE username=#{username} and password=#{password}
     </select>
+    <select id="checkEmail" resultType="java.lang.Integer" parameterType="String">
+        SELECT count(1)
+        FROM ymall_user
+        WHERE email = #{email}
+    </select>
+    <select id="checkEmailByUserId" resultType="java.lang.Integer" parameterType="map">
+        SELECT count(1)
+        FROM ymall_user
+        WHERE email = #{email} and id!=#{userId}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         DELETE FROM ymall_user
         WHERE id = #{id,jdbcType=INTEGER}
@@ -118,12 +128,6 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.ymall.pojo.User">
         update ymall_user
         <set>
-            <if test="username != null">
-                username = #{username,jdbcType=VARCHAR},
-            </if>
-            <if test="password != null">
-                password = #{password,jdbcType=VARCHAR},
-            </if>
             <if test="email != null">
                 email = #{email,jdbcType=VARCHAR},
             </if>
@@ -150,9 +154,7 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.ymall.pojo.User">
         UPDATE ymall_user
-        SET username    = #{username,jdbcType=VARCHAR},
-            password    = #{password,jdbcType=VARCHAR},
-            email       = #{email,jdbcType=VARCHAR},
+        SET email       = #{email,jdbcType=VARCHAR},
             phone       = #{phone,jdbcType=VARCHAR},
             question    = #{question,jdbcType=VARCHAR},
             answer      = #{answer,jdbcType=VARCHAR},

@@ -56,10 +56,6 @@ public class ServerResponse<T> implements Serializable {
         return new ServerResponse<T>(HttpStatus.OK.value());
     }
 
-    public static <T> ServerResponse<T> createBySuccessMessage(String msg){
-        return new ServerResponse<T>(HttpStatus.OK.value(),msg);
-    }
-
     public static <T> ServerResponse<T> createBySuccess(T data){
         return new ServerResponse<T>(HttpStatus.OK.value(),data);
     }
@@ -68,6 +64,9 @@ public class ServerResponse<T> implements Serializable {
         return new ServerResponse<T>(HttpStatus.OK.value(),msg,data);
     }
 
+    public static <T> ServerResponse<T> createBySuccessMessage(String msg){
+        return new ServerResponse<T>(HttpStatus.OK.value(),msg);
+    }
 
     public static <T> ServerResponse<T> createByError(){
         return new ServerResponse<T>(HttpStatus.INTERNAL_SERVER_ERROR.value(),HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
