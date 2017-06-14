@@ -1,6 +1,7 @@
 package com.ymall.interceptor;
 
 import com.ymall.annotation.AccessRequired;
+import com.ymall.annotation.AdminReqired;
 import com.ymall.common.Const;
 import com.ymall.common.exception.UnauthorizedException;
 import com.ymall.pojo.User;
@@ -21,16 +22,30 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
         if (handler.getClass().isAssignableFrom(HandlerMethod.class)) {
             AccessRequired accessRequired = ((HandlerMethod) handler).getMethodAnnotation(AccessRequired.class);
-            //没有声明需要权限,或者声明不验证权限
-            if (accessRequired == null || !accessRequired.validate())
-                return true;
-            else {
-                //在这里实现自己的权限验证逻辑
+            AdminReqired adminReqired = ((HandlerMethod) handler).getMethodAnnotation(AdminReqired.class);
+            //管理员验证
+            if (adminReqired != null && adminReqired.validate()) {
                 User user = (User) httpServletRequest.getSession().getAttribute(Const.CURRENT_USER);
                 if (user == null) {
                     throw new UnauthorizedException("未登录");
-                } else {return true;}
+                }
+                if(user.getRole()!=Const.Role.ROLE_ADMIN){
+                    throw new UnauthorizedException("你不是管理员无权访问");
+                }
+                return true;
             }
+
+
+            //普通登录验证
+            if (accessRequired != null && accessRequired.validate()) {
+                User user = (User) httpServletRequest.getSession().getAttribute(Const.CURRENT_USER);
+                if (user == null) {
+                    throw new UnauthorizedException("未登录");
+                }
+                return true;
+            }
+
+            return true;
         }
         return true;
     }

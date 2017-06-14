@@ -27,8 +27,9 @@ public class UserController {
     //用户登录
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public ServerResponse<User> login(
-            @RequestParam(required = true) String username,
-            @RequestParam(required = true) String password, HttpSession session) throws UnauthorizedException {
+            @RequestParam String username,
+            @RequestParam String password,
+            HttpSession session) throws UnauthorizedException {
 
         ServerResponse<User> response = userService.login(username, password);
 

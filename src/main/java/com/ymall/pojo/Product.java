@@ -1,13 +1,15 @@
 package com.ymall.pojo;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class Product {
     private Integer id;
 
+    @NotNull(message = "分类ID不能为空")
     private Integer categoryId;
-
+    @NotNull(message = "名称不能为空")
     private String name;
 
     private String subtitle;
@@ -18,8 +20,10 @@ public class Product {
 
     private String detail;
 
+    @NotNull(message = "价格不能为空")
     private BigDecimal price;
 
+    @NotNull(message = "库存不能为空")
     private Integer stock;
 
     private Integer status;

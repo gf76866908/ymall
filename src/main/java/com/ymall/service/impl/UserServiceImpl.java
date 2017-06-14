@@ -9,16 +9,17 @@ import com.ymall.pojo.User;
 import com.ymall.service.UserService;
 import com.ymall.util.MD5Util;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 /**
  * Created by zc on 2017/6/13.
  */
 @Service("userService")
 public class UserServiceImpl implements UserService {
+    private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserMapper userMapper;
@@ -63,7 +64,7 @@ public class UserServiceImpl implements UserService {
         if (Const.USERNAME.equals(type)) {
             int count = userMapper.checkUsername(str);
             if (count > 0) {
-                throw new IllegalException("用户已存在");
+                throw new IllegalException("用户名已存在");
             }else {
                 return ServerResponse.createBySuccessMessage("用户名可以使用");
             }

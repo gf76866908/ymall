@@ -9,6 +9,8 @@ public class Category {
 
     private String name;
 
+    private String categoryImage;
+
     private Boolean status;
 
     private Integer sortOrder;
@@ -17,10 +19,11 @@ public class Category {
 
     private Date updateTime;
 
-    public Category(Integer id, Integer parentId, String name, Boolean status, Integer sortOrder, Date createTime, Date updateTime) {
+    public Category(Integer id, Integer parentId, String name,String categoryImage, Boolean status, Integer sortOrder, Date createTime, Date updateTime) {
         this.id = id;
         this.parentId = parentId;
         this.name = name;
+        this.categoryImage=categoryImage;
         this.status = status;
         this.sortOrder = sortOrder;
         this.createTime = createTime;
@@ -85,5 +88,28 @@ public class Category {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getCategoryImage() {
+        return categoryImage;
+    }
+
+    public void setCategoryImage(String categoryImage) {
+        this.categoryImage = categoryImage;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Category category = (Category) o;
+
+        return id != null ? id.equals(category.id) : category.id == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }
