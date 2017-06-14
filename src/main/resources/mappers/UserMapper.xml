@@ -3,20 +3,25 @@
 <mapper namespace="com.ymall.dao.UserMapper">
     <resultMap id="BaseResultMap" type="com.ymall.pojo.User">
         <constructor>
-            <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-            <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String"/>
-            <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String"/>
-            <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String"/>
-            <arg column="phone" jdbcType="VARCHAR" javaType="java.lang.String"/>
-            <arg column="question" jdbcType="VARCHAR" javaType="java.lang.String"/>
-            <arg column="answer" jdbcType="VARCHAR" javaType="java.lang.String"/>
-            <arg column="role" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-            <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
-            <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="avatar" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="birthday" jdbcType="DATE" javaType="java.util.Date" />
+            <arg column="description" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="gender" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="question" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="answer" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="role" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+            <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        id, username, password, email, phone, question, answer, role, create_time, update_time
+        id, username, password, email, phone, avatar, birthday, description, gender, question, answer,
+        role, create_time, update_time
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -50,117 +55,160 @@
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.ymall.pojo.User">
-        INSERT INTO ymall_user (id, username, password,
-                                email, phone, question,
-                                answer, role, create_time,
-                                update_time)
-        VALUES (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-                #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR},
-                #{answer,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, now(), now())
+        insert into ymall_user (id, username, password,
+                                email, phone, avatar,
+                                birthday, description, gender,
+                                question, answer, role,
+                                create_time, update_time)
+        values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+                                        #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR},
+                                        '2017-01-01', #{description,jdbcType=VARCHAR}, '保密',
+                                        #{question,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER},
+               now(), now())
     </insert>
     <insert id="insertSelective" parameterType="com.ymall.pojo.User">
         insert into ymall_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
+            <if test="id != null" >
                 id,
             </if>
-            <if test="username != null">
+            <if test="username != null" >
                 username,
             </if>
-            <if test="password != null">
+            <if test="password != null" >
                 password,
             </if>
-            <if test="email != null">
+            <if test="email != null" >
                 email,
             </if>
-            <if test="phone != null">
+            <if test="phone != null" >
                 phone,
             </if>
-            <if test="question != null">
+            <if test="avatar != null" >
+                avatar,
+            </if>
+            birthday,
+            <if test="description != null" >
+                description,
+            </if>
+            gender,
+            <if test="question != null" >
                 question,
             </if>
-            <if test="answer != null">
+            <if test="answer != null" >
                 answer,
             </if>
-            <if test="role != null">
+            <if test="role != null" >
                 role,
             </if>
-            <if test="createTime != null">
                 create_time,
-            </if>
-            <if test="updateTime != null">
                 update_time,
-            </if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="username != null">
+            <if test="username != null" >
                 #{username,jdbcType=VARCHAR},
             </if>
-            <if test="password != null">
+            <if test="password != null" >
                 #{password,jdbcType=VARCHAR},
             </if>
-            <if test="email != null">
+            <if test="email != null" >
                 #{email,jdbcType=VARCHAR},
             </if>
-            <if test="phone != null">
+            <if test="phone != null" >
                 #{phone,jdbcType=VARCHAR},
             </if>
-            <if test="question != null">
+            <if test="avatar != null" >
+                #{avatar,jdbcType=VARCHAR},
+            </if>
+            <choose>
+                <when test="birthday != null">
+                    birthday = #{birthday,jdbcType=DATE},
+                </when>
+                <otherwise>
+                    '2017-01-01',
+                </otherwise>
+            </choose>
+            <if test="description != null" >
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <choose>
+                <when test="gender != null">
+                    gender = #{gender,jdbcType=VARCHAR},
+                </when>
+                <otherwise>
+                    '保密',
+                </otherwise>
+            </choose>
+            <if test="question != null" >
                 #{question,jdbcType=VARCHAR},
             </if>
-            <if test="answer != null">
+            <if test="answer != null" >
                 #{answer,jdbcType=VARCHAR},
             </if>
-            <if test="role != null">
+            <if test="role != null" >
                 #{role,jdbcType=INTEGER},
             </if>
-            <if test="createTime != null">
                 now(),
-            </if>
-            <if test="updateTime != null">
                 now(),
-            </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.ymall.pojo.User">
+    <update id="updateByPrimaryKeySelective" parameterType="com.ymall.pojo.User" >
         update ymall_user
         <set>
-            <if test="email != null">
+            <if test="username != null" >
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
                 email = #{email,jdbcType=VARCHAR},
             </if>
-            <if test="phone != null">
+            <if test="phone != null" >
                 phone = #{phone,jdbcType=VARCHAR},
             </if>
-            <if test="question != null">
+            <if test="avatar != null" >
+                avatar = #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null" >
+                birthday = #{birthday,jdbcType=DATE},
+            </if>
+            <if test="description != null" >
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null" >
+                gender = #{gender,jdbcType=VARCHAR},
+            </if>
+            <if test="question != null" >
                 question = #{question,jdbcType=VARCHAR},
             </if>
-            <if test="answer != null">
+            <if test="answer != null" >
                 answer = #{answer,jdbcType=VARCHAR},
             </if>
-            <if test="role != null">
+            <if test="role != null" >
                 role = #{role,jdbcType=INTEGER},
             </if>
-            <if test="createTime != null">
+            <if test="createTime != null" >
                 create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="updateTime != null">
                 update_time = now(),
-            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.ymall.pojo.User">
         UPDATE ymall_user
-        SET email       = #{email,jdbcType=VARCHAR},
-            phone       = #{phone,jdbcType=VARCHAR},
-            question    = #{question,jdbcType=VARCHAR},
-            answer      = #{answer,jdbcType=VARCHAR},
-            role        = #{role,jdbcType=INTEGER},
+        SET username = #{username,jdbcType=VARCHAR},
+            email = #{email,jdbcType=VARCHAR},
+            phone = #{phone,jdbcType=VARCHAR},
+            avatar = #{avatar,jdbcType=VARCHAR},
+            birthday = #{birthday,jdbcType=DATE},
+            description = #{description,jdbcType=VARCHAR},
+            gender = #{gender,jdbcType=VARCHAR},
+            question = #{question,jdbcType=VARCHAR},
+            answer = #{answer,jdbcType=VARCHAR},
+            role = #{role,jdbcType=INTEGER},
             create_time = #{createTime,jdbcType=TIMESTAMP},
             update_time = now()
-        WHERE id = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

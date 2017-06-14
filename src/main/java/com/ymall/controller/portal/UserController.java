@@ -1,4 +1,4 @@
-package com.ymall.controller;
+package com.ymall.controller.portal;
 
 import com.ymall.annotation.AccessRequired;
 import com.ymall.common.Const;
@@ -42,7 +42,7 @@ public class UserController {
 
     //注销
     @AccessRequired
-    @RequestMapping(value = "logout", method = RequestMethod.GET)
+    @RequestMapping(value = "logout", method = RequestMethod.POST)
     public ServerResponse<String> logout(HttpSession session) {
         session.removeAttribute(Const.CURRENT_USER);
         return ServerResponse.createBySuccess("注销成功");
@@ -51,13 +51,16 @@ public class UserController {
     //注册
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public ServerResponse<String> register(User user) throws IllegalException {
+        if(user.getUsername()==null&&user.getPassword()==null){
+            throw new IllegalException("注册信息不完整");
+        }
         return userService.register(user);
     }
 
     //检查用户名或email
     @RequestMapping(value = "check_valid", method = RequestMethod.GET)
-    public ServerResponse<String> checkValid(@RequestParam(required = true) String str, @RequestParam(required = true) String type) throws IllegalException {
-        return userService.checkValid(str, type);
+    public ServerResponse<String> checkValid(@RequestParam(required = true) String value, @RequestParam(required = true) String type) throws IllegalException {
+        return userService.checkValid(value, type);
     }
 
     //获取用户信息
@@ -82,10 +85,15 @@ public class UserController {
     //修改用户信息
     @AccessRequired
     @RequestMapping(value = "my_info", method = RequestMethod.PUT)
-    public ServerResponse<User> updateUserInfo(HttpSession session,User user){
+    public ServerResponse<User> updateUserInfo(HttpSession session,User user) throws IllegalException {
         User user_login = (User) session.getAttribute(Const.CURRENT_USER);
         user.setId(user_login.getId());
-        userService.updateUserInfo(user);
-                return null;
+        user.setUsername(user_login.getUsername());
+        ServerResponse<User> userServerResponse = userService.updateUserInfo(user);
+        if(userServerResponse.isSuccess()){
+            userServerResponse.getData().setUsername(user_login.getUsername());
+            session.setAttribute(Const.CURRENT_USER,userServerResponse.getData());
+        }
+        return userServerResponse;
     }
 }

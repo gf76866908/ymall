@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
         user.setRole(Const.Role.ROLE_CUSTOMER);
         //MD5 加密
         user.setPassword(MD5Util.MD5EncodeUtf8(user.getPassword()));
-        int count = userMapper.insertSelective(user);
+        int count = userMapper.insert(user);
         if (count <= 0) {
             throw new IllegalException("注册失败");
         }
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
             if (count > 0) {
                 throw new IllegalException("用户已存在");
             }else {
-                return ServerResponse.createByErrorMessage("校验用户名成功");
+                return ServerResponse.createBySuccessMessage("用户名可以使用");
             }
         }
         else if(Const.EMAIL.equals(type)){
@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
             if (count > 0) {
                 throw new IllegalException("邮箱已存在");
             }else {
-                return ServerResponse.createByErrorMessage("校验邮箱成功");
+                return ServerResponse.createBySuccessMessage("邮箱可以使用");
             }
         }
         else {
@@ -96,7 +96,10 @@ public class UserServiceImpl implements UserService {
         }
         int update_count=userMapper.updateByPrimaryKeySelective(user);
         if(update_count>0){
-            return ServerResponse.createBySuccess("更新个人信息成功",user);
+            User response_user = userMapper.selectByPrimaryKey(user.getId());
+            //密码置空
+            response_user.setPassword(StringUtils.EMPTY);
+            return ServerResponse.createBySuccess("更新个人信息成功",response_user);
         }
         throw new IllegalException("更新个人信息失败");
     }

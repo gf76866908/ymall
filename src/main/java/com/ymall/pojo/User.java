@@ -13,6 +13,14 @@ public class User {
 
     private String phone;
 
+    private String avatar;
+
+    private Date birthday;
+
+    private String description;
+
+    private String gender;
+
     private String question;
 
     private String answer;
@@ -23,12 +31,16 @@ public class User {
 
     private Date updateTime;
 
-    public User(Integer id, String username, String password, String email, String phone, String question, String answer, Integer role, Date createTime, Date updateTime) {
+    public User(Integer id, String username, String password, String email, String phone, String avatar, Date birthday, String description, String gender, String question, String answer, Integer role, Date createTime, Date updateTime) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.phone = phone;
+        this.avatar = avatar;
+        this.birthday = birthday;
+        this.description = description;
+        this.gender = gender;
         this.question = question;
         this.answer = answer;
         this.role = role;
@@ -78,6 +90,38 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone == null ? null : phone.trim();
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar == null ? null : avatar.trim();
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getdescription() {
+        return description;
+    }
+
+    public void setdescription(String description) {
+        this.description = description == null ? null : description.trim();
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender == null ? null : gender.trim();
     }
 
     public String getQuestion() {
