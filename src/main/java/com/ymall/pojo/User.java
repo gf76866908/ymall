@@ -1,12 +1,14 @@
 package com.ymall.pojo;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class User {
     private Integer id;
 
+    @NotNull(message = "用户名不能为空")
     private String username;
-
+    @NotNull(message = "密码不能为空")
     private String password;
 
     private String email;
@@ -108,11 +110,11 @@ public class User {
         this.birthday = birthday;
     }
 
-    public String getdescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setdescription(String description) {
+    public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
     }
 

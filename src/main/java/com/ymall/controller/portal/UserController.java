@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 /**
  * Created by zc on 2017/6/13.
@@ -51,10 +52,7 @@ public class UserController {
 
     //注册
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public ServerResponse<String> register(User user) throws IllegalException {
-        if(user.getUsername()==null&&user.getPassword()==null){
-            throw new IllegalException("注册信息不完整");
-        }
+    public ServerResponse<String> register(@Valid User user) throws IllegalException {
         return userService.register(user);
     }
 

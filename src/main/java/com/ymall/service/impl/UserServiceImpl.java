@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
         user.setRole(Const.Role.ROLE_CUSTOMER);
         //MD5 加密
         user.setPassword(MD5Util.MD5EncodeUtf8(user.getPassword()));
-        int count = userMapper.insert(user);
+        int count = userMapper.insertSelective(user);
         if (count <= 0) {
             throw new IllegalException("注册失败");
         }

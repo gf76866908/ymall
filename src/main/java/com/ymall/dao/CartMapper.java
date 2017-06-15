@@ -1,7 +1,9 @@
 package com.ymall.dao;
 
 import com.ymall.pojo.Cart;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CartMapper {
     int deleteByPrimaryKey(Integer id);
 

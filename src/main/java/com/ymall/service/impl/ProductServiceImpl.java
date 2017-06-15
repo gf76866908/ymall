@@ -43,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
                     product.setStatus(Const.ProductStatusEnum.ON_SALE.getCode());
                 }
 
-                int rowCount = productMapper.insert(product);
+                int rowCount = productMapper.insertSelective(product);
                 if(rowCount > 0){
                     return ServerResponse.createBySuccess("新增产品成功");
                 }

@@ -33,7 +33,7 @@ public class CategoryServiceImpl implements CategoryService {
         category.setCategoryImage(categoryImage);
         category.setStatus(true);//这个分类是可用的
 
-        int rowCount = categoryMapper.insert(category);
+        int rowCount = categoryMapper.insertSelective(category);
         if(rowCount > 0){
             return ServerResponse.createBySuccess("添加品类成功");
         }
@@ -69,7 +69,7 @@ public class CategoryServiceImpl implements CategoryService {
     public Set<Category> selectAllChildren(Integer categoryId) throws IllegalException {
 
         Set<Category> categorySet = Sets.newHashSet();
-        findChildCategory(categorySet,categoryId,categoryId);
+        findChildCategory(categorySet,categoryId);
 
         if(categorySet.isEmpty()){
             logger.info("未找到当前分类的递归子分类");
@@ -110,15 +110,15 @@ public class CategoryServiceImpl implements CategoryService {
 
 
     //递归算法,算出子节点
-    private Set<Category> findChildCategory(Set<Category> categorySet ,Integer categoryId,Integer root_id){
+    private Set<Category> findChildCategory(Set<Category> categorySet ,Integer categoryId){
         Category category = categoryMapper.selectByPrimaryKey(categoryId);
-        if(category != null&& !Objects.equals(category.getId(), root_id)){
+        if(category != null){
             categorySet.add(category);
         }
         //查找子节点,递归算法一定要有一个退出的条件
         List<Category> categoryList = categoryMapper.selectCategoryChildrenByParentId(categoryId);
         for(Category categoryItem : categoryList){
-            findChildCategory(categorySet,categoryItem.getId(),root_id);
+            findChildCategory(categorySet,categoryItem.getId());
         }
         return categorySet;
     }

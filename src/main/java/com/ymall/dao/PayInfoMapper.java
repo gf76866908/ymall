@@ -1,7 +1,9 @@
 package com.ymall.dao;
 
 import com.ymall.pojo.PayInfo;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface PayInfoMapper {
     int deleteByPrimaryKey(Integer id);
 

@@ -1,7 +1,9 @@
 package com.ymall.dao;
 
 import com.ymall.pojo.Shipping;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ShippingMapper {
     int deleteByPrimaryKey(Integer id);
 
