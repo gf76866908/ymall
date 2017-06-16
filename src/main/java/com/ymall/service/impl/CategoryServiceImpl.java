@@ -35,7 +35,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         int rowCount = categoryMapper.insertSelective(category);
         if(rowCount > 0){
-            return ServerResponse.createBySuccess("添加品类成功");
+            return ServerResponse.createBySuccessMessage("添加品类成功");
         }
         throw new IllegalException("添加品类失败");
     }
@@ -45,7 +45,7 @@ public class CategoryServiceImpl implements CategoryService {
         category.setId(categoryId);
         int rowCount = categoryMapper.updateByPrimaryKeySelective(category);
         if(rowCount > 0){
-            return ServerResponse.createBySuccess("更新品类成功");
+            return ServerResponse.createBySuccessMessage("更新品类成功");
         }
         throw new IllegalException("更新品类失败");
     }
@@ -66,7 +66,7 @@ public class CategoryServiceImpl implements CategoryService {
      * @param categoryId
      * @return
      */
-    public Set<Category> selectAllChildren(Integer categoryId) throws IllegalException {
+    public ServerResponse<Set<Category>> selectAllChildren(Integer categoryId) throws IllegalException {
 
         Set<Category> categorySet = Sets.newHashSet();
         findChildCategory(categorySet,categoryId);
@@ -74,7 +74,7 @@ public class CategoryServiceImpl implements CategoryService {
         if(categorySet.isEmpty()){
             logger.info("未找到当前分类的递归子分类");
         }
-        return categorySet;
+        return ServerResponse.createBySuccess(categorySet);
     }
 
 
@@ -85,7 +85,7 @@ public class CategoryServiceImpl implements CategoryService {
      */
     public List<Integer> selectAllChildrenId(Integer categoryId) throws IllegalException {
 
-        Set<Category> categorySet=selectAllChildren(categoryId);
+        Set<Category> categorySet=selectAllChildren(categoryId).getData();
 
         List<Integer> categoryIdList = Lists.newArrayList();
         if(categoryId != null){

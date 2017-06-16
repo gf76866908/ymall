@@ -19,18 +19,19 @@ public class CategoryController
 {
     @Autowired
     private CategoryService categoryService;
-
+    //ToDo 接口名字改了
     //获取平级子分类
-    @RequestMapping(value = "sub_category",method = RequestMethod.GET)
-    public ServerResponse<List<Category>> getChildrenParallelCategory(@RequestParam(defaultValue = "0") Integer parentId) throws IllegalException {
+    @RequestMapping(value = "sub_list",method = RequestMethod.GET)
+    public ServerResponse<List<Category>> getChildrenParallelCategory(
+            @RequestParam(defaultValue = "0") Integer parentId) throws IllegalException {
         return categoryService.getChildrenParallelCategory(parentId);
     }
 
     //获取当前节点的所有递归子节点 传0是根节点列表
-    @RequestMapping(value = "sub_deep_category",method = RequestMethod.GET)
-    public ServerResponse<Set<Category>> selectCategoryAndChildrenById(@RequestParam(defaultValue = "0") Integer parentId) throws IllegalException {
-        Set<Category> categories = categoryService.selectAllChildren(parentId);
-        return ServerResponse.createBySuccess(categories);
+    @RequestMapping(value = "sub_deep_list",method = RequestMethod.GET)
+    public ServerResponse<Set<Category>> selectCategoryAndChildrenById(
+            @RequestParam(defaultValue = "0") Integer parentId) throws IllegalException {
+        return categoryService.selectAllChildren(parentId);
     }
 
 

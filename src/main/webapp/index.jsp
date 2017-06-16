@@ -1,5 +1,5 @@
 <html>
 <body>
-<h2>Hello World!</h2>
+<h2 align="center">Welcome YMALL Restful API</h2>
 </body>
 </html>

@@ -9,6 +9,7 @@ public class Product {
 
     @NotNull(message = "分类ID不能为空")
     private Integer categoryId;
+
     @NotNull(message = "名称不能为空")
     private String name;
 

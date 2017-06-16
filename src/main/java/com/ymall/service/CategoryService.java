@@ -13,7 +13,7 @@ public interface CategoryService {
 
     ServerResponse updateCategory(Integer categoryId, Category categoryName) throws IllegalException;
     ServerResponse<List<Category>> getChildrenParallelCategory(Integer parentId) throws IllegalException;
-    Set<Category> selectAllChildren(Integer parentId) throws IllegalException;
+    ServerResponse<Set<Category>> selectAllChildren(Integer parentId) throws IllegalException;
     List<Integer> selectAllChildrenId(Integer parentId) throws IllegalException;
 
     ServerResponse setCategoryStatus(Integer categoryId,Boolean status) throws IllegalException;

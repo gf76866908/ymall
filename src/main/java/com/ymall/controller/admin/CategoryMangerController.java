@@ -23,7 +23,7 @@ public class CategoryMangerController {
     @RequestMapping(value = "category", method = RequestMethod.POST)
     public ServerResponse addCategory(@RequestParam String categoryName,
                                       @RequestParam(defaultValue = "0") Integer parentId,
-                                      @RequestParam(required = false) String categoryImage) throws IllegalException {
+                                      String categoryImage) throws IllegalException {
         return categoryService.addCategory(categoryName, parentId,categoryImage);
     }
 
