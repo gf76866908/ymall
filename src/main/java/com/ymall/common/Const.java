@@ -1,9 +1,6 @@
 package com.ymall.common;
 
 import com.google.common.collect.Sets;
-import com.sun.tools.javac.code.Attribute;
-
-import java.util.HashSet;
 import java.util.Set;
 
 /*
