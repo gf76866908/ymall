@@ -86,7 +86,7 @@ public class ProductServiceImpl implements ProductService {
         if (rowCount > 0) {
             return ServerResponse.createBySuccess("修改商品销售状态成功");
         }
-        throw new IllegalException("修改商品销售状态失败");
+        throw new IllegalException("修改商品销售状态失败亦或商品不存在");
     }
 
 
@@ -179,8 +179,8 @@ public class ProductServiceImpl implements ProductService {
             ProductListVo productListVo = assembleProductListVo(productItem);
             productListVoList.add(productListVo);
         }
-        PageInfo pageResult = new PageInfo<>(productListVoList);
-//        pageResult.setList(productListVoList);
+        PageInfo pageResult = new PageInfo<>(productList);
+        pageResult.setList(productListVoList);
         PageModel<ProductListVo> pageModel = PageModel.convertToPageModel(pageResult);
         return ServerResponse.createBySuccess(pageModel);
     }

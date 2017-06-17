@@ -20,7 +20,7 @@ public class PageModel<T> {
     private boolean paging=true;
 
     //请求页码
-    @NotNull(message = "分页参数错误(page)")
+    @NotNull(message = "分页参数错误(pageNum)")
     private Integer pageNum;
 
     //每页多少条
