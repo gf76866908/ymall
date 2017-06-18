@@ -19,7 +19,6 @@ public class CategoryController
 {
     @Autowired
     private CategoryService categoryService;
-    //ToDo 接口名字改了
     //获取平级子分类
     @RequestMapping(value = "sub_list",method = RequestMethod.GET)
     public ServerResponse<List<Category>> getChildrenParallelCategory(

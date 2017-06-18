@@ -26,8 +26,8 @@ public class UserMangerController {
     //后台登录
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public ServerResponse<User> login(
-            @RequestParam(required = true) String username,
-            @RequestParam(required = true) String password, HttpSession session) throws UnauthorizedException, IllegalException {
+            @RequestParam String username,
+            @RequestParam String password, HttpSession session) throws UnauthorizedException, IllegalException {
         ServerResponse<User> response = userService.login(username, password);
         // 向session中加入当前用户信息
         if (response.isSuccess()) {

@@ -38,6 +38,7 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private CategoryService categoryService;
 
+    //新增或更新商品
     public ServerResponse saveOrUpdateProduct(Product product) throws IllegalException {
         if (product != null) {
             if (StringUtils.isNotBlank(product.getSubImages())) {
@@ -69,7 +70,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /*
-    * 商品状态.
+    * 修改商品状态.
     * 1-在售
     * 2-下架
     * 3-删除
@@ -100,43 +101,6 @@ public class ProductServiceImpl implements ProductService {
         ProductDetailVo productDetailVo = assembleProductDetailVo(product);
         return ServerResponse.createBySuccess(productDetailVo);
     }
-
-    //组装ProductDetailVo
-    private ProductDetailVo assembleProductDetailVo(Product product) {
-        ProductDetailVo productDetailVo = new ProductDetailVo();
-        productDetailVo.setId(product.getId());
-        productDetailVo.setSubtitle(product.getSubtitle());
-        productDetailVo.setPrice(product.getPrice());
-
-        productDetailVo.setCategoryId(product.getCategoryId());
-        productDetailVo.setDetail(product.getDetail());
-        productDetailVo.setName(product.getName());
-        productDetailVo.setStatus(product.getStatus());
-        productDetailVo.setStock(product.getStock());
-
-
-        productDetailVo.setMainImage(PropertiesUtil.getProperty("cos.server.http.prefix") + product.getMainImage());
-
-        //将图像列表解开
-        List<String> url_list = new ArrayList<String>();
-        String[] split = product.getSubImages().split(",");
-        for (String url : split) {
-            url_list.add(PropertiesUtil.getProperty("cos.server.http.prefix") + url);
-        }
-        productDetailVo.setSubImages(url_list);
-
-        Category category = categoryMapper.selectByPrimaryKey(product.getCategoryId());
-        if (category == null) {
-            productDetailVo.setParentCategoryId(0);//没有品类就把它当做根节点
-        } else {
-            productDetailVo.setParentCategoryId(category.getParentId());
-        }
-
-        productDetailVo.setCreateTime(DateTimeUtil.dateToStr(product.getCreateTime()));
-        productDetailVo.setUpdateTime(DateTimeUtil.dateToStr(product.getUpdateTime()));
-        return productDetailVo;
-    }
-
 
     public ServerResponse<PageModel<ProductListVo>> getProductList(
             Integer productStatus,
@@ -185,6 +149,7 @@ public class ProductServiceImpl implements ProductService {
         return ServerResponse.createBySuccess(pageModel);
     }
 
+
     //组装ProductListVo
     private ProductListVo assembleProductListVo(Product product) {
         ProductListVo productListVo = new ProductListVo();
@@ -197,6 +162,48 @@ public class ProductServiceImpl implements ProductService {
         productListVo.setStatus(product.getStatus());
         return productListVo;
     }
+
+
+    //组装ProductDetailVo
+    private ProductDetailVo assembleProductDetailVo(Product product) {
+        ProductDetailVo productDetailVo = new ProductDetailVo();
+        productDetailVo.setId(product.getId());
+        productDetailVo.setSubtitle(product.getSubtitle());
+        productDetailVo.setPrice(product.getPrice());
+
+        productDetailVo.setCategoryId(product.getCategoryId());
+        productDetailVo.setDetail(product.getDetail());
+        productDetailVo.setName(product.getName());
+        productDetailVo.setStatus(product.getStatus());
+        productDetailVo.setStock(product.getStock());
+
+
+        productDetailVo.setMainImage(PropertiesUtil.getProperty("cos.server.http.prefix") + product.getMainImage());
+
+        //将图像列表解开
+        List<String> url_list = new ArrayList<String>();
+        String[] split = product.getSubImages().split(",");
+        for (String url : split) {
+            url_list.add(PropertiesUtil.getProperty("cos.server.http.prefix") + url);
+        }
+        productDetailVo.setSubImages(url_list);
+
+        Category category = categoryMapper.selectByPrimaryKey(product.getCategoryId());
+        if (category == null) {
+            productDetailVo.setParentCategoryId(0);//没有品类就把它当做根节点
+        } else {
+            productDetailVo.setParentCategoryId(category.getParentId());
+        }
+
+        productDetailVo.setCreateTime(DateTimeUtil.dateToStr(product.getCreateTime()));
+        productDetailVo.setUpdateTime(DateTimeUtil.dateToStr(product.getUpdateTime()));
+        return productDetailVo;
+    }
+
+
+
+
+
 
 
 }

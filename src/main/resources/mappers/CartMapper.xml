@@ -7,7 +7,7 @@
       <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="product_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="checked" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="checked" jdbcType="BIT" javaType="java.lang.Boolean" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
@@ -105,4 +105,63 @@
       update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectCartByUserIdProductId" resultMap="BaseResultMap" parameterType="map">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from ymall_cart
+    where user_id = #{userId}
+    and product_id = #{productId}
+  </select>
+
+  <select id="selectCartByUserId" resultMap="BaseResultMap" parameterType="int">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from ymall_cart
+    where user_id = #{userId}
+  </select>
+
+  <select id="selectCartProductCheckedCount" parameterType="int" resultType="int">
+    select count(1) from ymall_cart where user_id = #{userId} AND checked=TRUE
+  </select>
+
+  <delete id="deleteByUserIdProductId" parameterType="map">
+    delete from ymall_cart
+    where user_id = #{userId}
+    <if test="productId != null">
+      and product_id = #{productId}
+    </if>
+  </delete>
+
+  <delete id="deleteByUserIdChecked" parameterType="map">
+    delete from ymall_cart
+    where user_id = #{userId}
+     AND
+    checked = TRUE
+  </delete>
+
+  <update id="checkedOrUncheckedProduct" parameterType="map">
+    UPDATE  ymall_cart
+    set checked = #{checked},
+    update_time = now()
+    where user_id = #{userId}
+    <if test="productId != null">
+      and product_id = #{productId}
+    </if>
+  </update>
+
+
+  <select id="selectCartProductCount" parameterType="int" resultType="int">
+    select IFNULL(sum(quantity),0) as count from ymall_cart where user_id = #{userId}
+  </select>
+
+
+  <select id="selectCheckedCartByUserId" parameterType="int" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from ymall_cart
+    where user_id = #{userId}
+    and checked = TRUE
+  </select>
+
 </mapper>

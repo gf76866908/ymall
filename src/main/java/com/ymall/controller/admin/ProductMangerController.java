@@ -65,9 +65,9 @@ public class ProductMangerController {
     @RequestMapping(value = "product_list",method = RequestMethod.GET)
     //获取所有商品列表(带分类与搜索)
     public ServerResponse<PageModel<ProductListVo>> getProductList(
-            String keyword,
-            Integer productId,
-            Integer categoryId,
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) Integer productId,
+            @RequestParam(required = false) Integer categoryId,
             @RequestParam(defaultValue = "id_asc") String orderBy,
             @Valid PageModel pageModel) throws IllegalException {
 

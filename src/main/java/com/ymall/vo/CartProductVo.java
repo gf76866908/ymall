@@ -2,9 +2,7 @@ package com.ymall.vo;
 
 import java.math.BigDecimal;
 
-/**
- * Created by geely
- */
+
 public class CartProductVo {
 
 //结合了产品和购物车的一个抽象对象
@@ -20,9 +18,9 @@ public class CartProductVo {
     private Integer productStatus;
     private BigDecimal productTotalPrice;
     private Integer productStock;
-    private Integer productChecked;//此商品是否勾选
+    private Boolean productChecked;//此商品是否勾选
 
-    private String limitQuantity;//限制数量的一个返回结果
+//    private String limitQuantity;//限制数量的一个返回结果
 
     public Integer getId() {
         return id;
@@ -112,19 +110,19 @@ public class CartProductVo {
         this.productStock = productStock;
     }
 
-    public Integer getProductChecked() {
+    public Boolean getProductChecked() {
         return productChecked;
     }
 
-    public void setProductChecked(Integer productChecked) {
+    public void setProductChecked(Boolean productChecked) {
         this.productChecked = productChecked;
     }
 
-    public String getLimitQuantity() {
-        return limitQuantity;
-    }
-
-    public void setLimitQuantity(String limitQuantity) {
-        this.limitQuantity = limitQuantity;
-    }
+//    public String getLimitQuantity() {
+//        return limitQuantity;
+//    }
+//
+//    public void setLimitQuantity(String limitQuantity) {
+//        this.limitQuantity = limitQuantity;
+//    }
 }

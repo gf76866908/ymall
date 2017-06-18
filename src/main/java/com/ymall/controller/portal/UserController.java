@@ -58,7 +58,8 @@ public class UserController {
 
     //检查用户名或email
     @RequestMapping(value = "check_valid", method = RequestMethod.GET)
-    public ServerResponse<String> checkValid(@RequestParam(required = true) String value, @RequestParam(required = true) String type) throws IllegalException {
+    public ServerResponse<String> checkValid(@RequestParam String value,
+                                             @RequestParam String type) throws IllegalException {
         return userService.checkValid(value, type);
     }
 
@@ -75,9 +76,9 @@ public class UserController {
     @AccessRequired
     @RequestMapping(value = "reset_password", method = RequestMethod.POST)
     public ServerResponse<String> forgetRestPassword(
-            String username,
-            String passwordNew,
-            String forgetToken){
+            @RequestParam String username,
+            @RequestParam String passwordNew,
+            @RequestParam String forgetToken){
         return userService.forgetResetPassword(username,passwordNew,forgetToken);
     }
 

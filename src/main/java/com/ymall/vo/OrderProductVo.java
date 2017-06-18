@@ -3,13 +3,10 @@ package com.ymall.vo;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by geely
- */
+
 public class OrderProductVo {
     private List<OrderItemVo> orderItemVoList;
     private BigDecimal productTotalPrice;
-    private String imageHost;
 
     public List<OrderItemVo> getOrderItemVoList() {
         return orderItemVoList;
@@ -27,11 +24,4 @@ public class OrderProductVo {
         this.productTotalPrice = productTotalPrice;
     }
 
-    public String getImageHost() {
-        return imageHost;
-    }
-
-    public void setImageHost(String imageHost) {
-        this.imageHost = imageHost;
-    }
 }

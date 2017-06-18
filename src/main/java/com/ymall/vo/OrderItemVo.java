@@ -3,9 +3,7 @@ package com.ymall.vo;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- * Created by geely
- */
+
 public class OrderItemVo {
 
     private Long orderNo;
