@@ -6,7 +6,7 @@
             <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
             <arg column="order_no" jdbcType="BIGINT" javaType="java.lang.Long"/>
             <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-            <arg column="shipping_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="address_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
             <arg column="payment" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
             <arg column="payment_type" jdbcType="INTEGER" javaType="java.lang.Integer"/>
             <arg column="postage" jdbcType="INTEGER" javaType="java.lang.Integer"/>
@@ -20,7 +20,7 @@
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        id, order_no, user_id, shipping_id, payment, payment_type, postage, status, payment_time,
+        id, order_no, user_id, address_id, payment, payment_type, postage, status, payment_time,
         send_time, end_time, close_time, create_time, update_time
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -35,12 +35,12 @@
     </delete>
     <insert id="insert" parameterType="com.ymall.pojo.Order">
         INSERT INTO ymall_order (id, order_no, user_id,
-                                 shipping_id, payment, payment_type,
+                                 address_id, payment, payment_type,
                                  postage, status, payment_time,
                                  send_time, end_time, close_time,
                                  create_time, update_time)
         VALUES (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER},
-                                        #{shippingId,jdbcType=INTEGER}, #{payment,jdbcType=DECIMAL},
+                                        #{addressId,jdbcType=INTEGER}, #{payment,jdbcType=DECIMAL},
                                         #{paymentType,jdbcType=INTEGER},
                                         #{postage,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
                                         #{paymentTime,jdbcType=TIMESTAMP},
@@ -60,8 +60,8 @@
             <if test="userId != null">
                 user_id,
             </if>
-            <if test="shippingId != null">
-                shipping_id,
+            <if test="addressId != null">
+                address_id,
             </if>
             <if test="payment != null">
                 payment,
@@ -100,8 +100,8 @@
             <if test="userId != null">
                 #{userId,jdbcType=INTEGER},
             </if>
-            <if test="shippingId != null">
-                #{shippingId,jdbcType=INTEGER},
+            <if test="addressId != null">
+                #{addressId,jdbcType=INTEGER},
             </if>
             <if test="payment != null">
                 #{payment,jdbcType=DECIMAL},
@@ -140,8 +140,8 @@
             <if test="userId != null">
                 user_id = #{userId,jdbcType=INTEGER},
             </if>
-            <if test="shippingId != null">
-                shipping_id = #{shippingId,jdbcType=INTEGER},
+            <if test="addressId != null">
+                address_id = #{addressId,jdbcType=INTEGER},
             </if>
             <if test="payment != null">
                 payment = #{payment,jdbcType=DECIMAL},
@@ -178,7 +178,7 @@
         UPDATE ymall_order
         SET order_no     = #{orderNo,jdbcType=BIGINT},
             user_id      = #{userId,jdbcType=INTEGER},
-            shipping_id  = #{shippingId,jdbcType=INTEGER},
+            address_id  = #{addressId,jdbcType=INTEGER},
             payment      = #{payment,jdbcType=DECIMAL},
             payment_type = #{paymentType,jdbcType=INTEGER},
             postage      = #{postage,jdbcType=INTEGER},

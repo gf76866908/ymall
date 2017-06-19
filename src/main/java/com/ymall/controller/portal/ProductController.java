@@ -26,7 +26,7 @@ public class ProductController {
     //获取在售商品详情
     @RequestMapping(value = "product_detail/{productId}",method = RequestMethod.GET)
     public ServerResponse<ProductDetailVo> getProductDetail(@PathVariable Integer productId) throws IllegalException {
-        return productService.getProductDetail(Const.ProductStatusEnum.ON_SALE.getCode(),productId);
+        return productService.getProductDetail(productId,Const.ProductStatusEnum.ON_SALE.getCode());
     }
 
     @RequestMapping(value = "product_list",method = RequestMethod.GET)

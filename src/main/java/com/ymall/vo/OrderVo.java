@@ -1,7 +1,6 @@
 package com.ymall.vo;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 public class OrderVo {
@@ -33,10 +32,10 @@ public class OrderVo {
     //订单的明细
     private List<OrderItemVo> orderItemVoList;
 
-    private Integer shippingId;
+    private Integer addressId;
     private String receiverName;
 
-    private ShippingVo shippingVo;
+    private AddressVo addressVo;
 
     public Long getOrderNo() {
         return orderNo;
@@ -142,12 +141,12 @@ public class OrderVo {
         this.orderItemVoList = orderItemVoList;
     }
 
-    public Integer getShippingId() {
-        return shippingId;
+    public Integer getAddressId() {
+        return addressId;
     }
 
-    public void setShippingId(Integer shippingId) {
-        this.shippingId = shippingId;
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
     }
 
     public String getReceiverName() {
@@ -158,11 +157,11 @@ public class OrderVo {
         this.receiverName = receiverName;
     }
 
-    public ShippingVo getShippingVo() {
-        return shippingVo;
+    public AddressVo getAddressVo() {
+        return addressVo;
     }
 
-    public void setShippingVo(ShippingVo shippingVo) {
-        this.shippingVo = shippingVo;
+    public void setAddressVo(AddressVo addressVo) {
+        this.addressVo = addressVo;
     }
 }

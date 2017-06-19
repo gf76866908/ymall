@@ -2,7 +2,7 @@ package com.ymall.pojo;
 
 import java.util.Date;
 
-public class Shipping {
+public class Address {
     private Integer id;
 
     private Integer userId;
@@ -27,7 +27,7 @@ public class Shipping {
 
     private Date updateTime;
 
-    public Shipping(Integer id, Integer userId, String receiverName, String receiverPhone, String receiverMobile, String receiverProvince, String receiverCity, String receiverDistrict, String receiverAddress, String receiverZip, Date createTime, Date updateTime) {
+    public Address(Integer id, Integer userId, String receiverName, String receiverPhone, String receiverMobile, String receiverProvince, String receiverCity, String receiverDistrict, String receiverAddress, String receiverZip, Date createTime, Date updateTime) {
         this.id = id;
         this.userId = userId;
         this.receiverName = receiverName;
@@ -42,7 +42,7 @@ public class Shipping {
         this.updateTime = updateTime;
     }
 
-    public Shipping() {
+    public Address() {
         super();
     }
 

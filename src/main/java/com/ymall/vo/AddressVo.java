@@ -1,7 +1,7 @@
 package com.ymall.vo;
 
 
-public class ShippingVo {
+public class AddressVo {
     private String receiverName;
 
     private String receiverPhone;

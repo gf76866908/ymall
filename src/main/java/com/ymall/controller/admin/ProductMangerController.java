@@ -58,7 +58,7 @@ public class ProductMangerController {
     @AdminReqired
     @RequestMapping(value = "product_detail/{productId}",method = RequestMethod.GET)
     public ServerResponse<ProductDetailVo> getProductDetail(@PathVariable Integer productId) throws IllegalException {
-        return productService.getProductDetail(null,productId);
+        return productService.getProductDetail(productId,null);
     }
 
     @AdminReqired
