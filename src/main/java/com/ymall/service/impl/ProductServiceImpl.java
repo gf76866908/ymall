@@ -182,9 +182,12 @@ public class ProductServiceImpl implements ProductService {
 
         //将图像列表解开
         List<String> url_list = new ArrayList<String>();
-        String[] split = product.getSubImages().split(",");
-        for (String url : split) {
-            url_list.add(PropertiesUtil.getProperty("cos.server.http.prefix") + url);
+        String subImages = product.getSubImages();
+        if(subImages!=null){
+            String[] split = subImages.split(",");
+            for (String url : split) {
+                url_list.add(PropertiesUtil.getProperty("cos.server.http.prefix") + url);
+            }
         }
         productDetailVo.setSubImages(url_list);
 
