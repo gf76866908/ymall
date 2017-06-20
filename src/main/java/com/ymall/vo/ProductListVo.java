@@ -7,12 +7,11 @@ public class ProductListVo {
 
     private Integer id;
     private Integer categoryId;
-
     private String name;
     private String subtitle;
     private String mainImage;
     private BigDecimal price;
-
+    private Integer sales;
     private Integer status;
 
     public Integer getId() {
@@ -71,4 +70,11 @@ public class ProductListVo {
         this.status = status;
     }
 
+    public Integer getSales() {
+        return sales;
+    }
+
+    public void setSales(Integer sales) {
+        this.sales = sales;
+    }
 }

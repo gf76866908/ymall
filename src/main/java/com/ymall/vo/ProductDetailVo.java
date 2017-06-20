@@ -14,6 +14,7 @@ public class ProductDetailVo {
     private String detail;
     private BigDecimal price;
     private Integer stock;
+    private Integer sales;
     private Integer status;
     private String createTime;
     private String updateTime;
@@ -123,5 +124,13 @@ public class ProductDetailVo {
 
     public void setParentCategoryId(Integer parentCategoryId) {
         this.parentCategoryId = parentCategoryId;
+    }
+
+    public Integer getSales() {
+        return sales;
+    }
+
+    public void setSales(Integer sales) {
+        this.sales = sales;
     }
 }

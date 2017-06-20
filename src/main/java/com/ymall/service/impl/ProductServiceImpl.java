@@ -57,6 +57,8 @@ public class ProductServiceImpl implements ProductService {
                 if (product.getStatus() == null) {
                     //默认上线
                     product.setStatus(Const.ProductStatusEnum.ON_SALE.getCode());
+                    //初始化销量
+                    product.setSales(0);
                 }
 
                 int rowCount = productMapper.insertSelective(product);
@@ -158,6 +160,7 @@ public class ProductServiceImpl implements ProductService {
         productListVo.setCategoryId(product.getCategoryId());
         productListVo.setMainImage(PropertiesUtil.getProperty("cos.server.http.prefix") + product.getMainImage());
         productListVo.setPrice(product.getPrice());
+        productListVo.setSales(product.getSales());
         productListVo.setSubtitle(product.getSubtitle());
         productListVo.setStatus(product.getStatus());
         return productListVo;
@@ -176,6 +179,7 @@ public class ProductServiceImpl implements ProductService {
         productDetailVo.setName(product.getName());
         productDetailVo.setStatus(product.getStatus());
         productDetailVo.setStock(product.getStock());
+        productDetailVo.setSales(product.getSales());
 
 
         productDetailVo.setMainImage(PropertiesUtil.getProperty("cos.server.http.prefix") + product.getMainImage());

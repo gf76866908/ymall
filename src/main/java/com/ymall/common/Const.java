@@ -15,7 +15,10 @@ public class Const {
     public static final String USERNAME = "username";
 
     public interface ProductListOrderBy {
-        Set<String> PRICE_ASC_DESC = Sets.newHashSet("price_desc", "price_asc", "id_desc", "id_asc");
+        Set<String> PRICE_ASC_DESC = Sets.newHashSet(
+                "price_desc", "price_asc",
+                "sales_desc","sales_asc",
+                "id_desc", "id_asc");
     }
 
     public interface Cart {

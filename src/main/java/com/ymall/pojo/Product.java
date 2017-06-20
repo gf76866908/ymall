@@ -27,13 +27,17 @@ public class Product {
     @NotNull(message = "库存不能为空")
     private Integer stock;
 
+    private Integer sales;
+
     private Integer status;
 
     private Date createTime;
 
     private Date updateTime;
 
-    public Product(Integer id, Integer categoryId, String name, String subtitle, String mainImage, String subImages, String detail, BigDecimal price, Integer stock, Integer status, Date createTime, Date updateTime) {
+    public Product(Integer id, Integer categoryId, String name, String subtitle, String mainImage,
+                   String subImages, String detail, BigDecimal price, Integer stock,
+                   Integer sales,Integer status, Date createTime, Date updateTime) {
         this.id = id;
         this.categoryId = categoryId;
         this.name = name;
@@ -43,6 +47,7 @@ public class Product {
         this.detail = detail;
         this.price = price;
         this.stock = stock;
+        this.sales = sales;
         this.status = status;
         this.createTime = createTime;
         this.updateTime = updateTime;
@@ -146,5 +151,13 @@ public class Product {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getSales() {
+        return sales;
+    }
+
+    public void setSales(Integer sales) {
+        this.sales = sales;
     }
 }
