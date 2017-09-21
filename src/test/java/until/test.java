@@ -7,7 +7,7 @@ import com.ymall.util.MD5Util;
  */
 public class test {
     public static void main(String[] args) {
-        String str=MD5Util.MD5EncodeUtf8("123456");
+        String str = MD5Util.MD5EncodeUtf8("1234567");
         System.out.println(str);
     }
 }
