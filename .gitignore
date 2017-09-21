@@ -27,3 +27,5 @@ Thumbs.db
 
 
 
+/src/main/resources/datasource.properties
+/src/main/resources/ymall.properties
